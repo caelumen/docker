@@ -1,6 +1,6 @@
 version: '3.1'
 
-service:
+services:
   dbserver:
     image: mysql
     restart: always
