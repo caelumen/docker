@@ -1,17 +1,20 @@
 version: '3.1'
-webserver:
-  image: wordpress
-  restart: always
-  ports:
-    - "443:80"
-  links:
-    - "dbserver:mysql"
-  environment:
-    WORDPRESS_DB_PASSWORD: password
-dbserver:
-  image: mysql
-  restart: always
-  volumes_from:
-    - dataonly
-  environment:
-    MYSQL_ROOT_PASSWORD: password
+
+service:
+  dbserver:
+    image: mysql
+    restart: always
+    volumes_from:
+     - dataonly
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+  
+  webserver:
+    image: wordpress
+    restart: always
+    ports:
+     - "443:80"
+    links:
+     - "dbserver:mysql"
+    environment:
+      WORDPRESS_DB_PASSWORD: password
